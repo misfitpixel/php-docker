@@ -11,7 +11,9 @@ name: Publish Container
 
 on:
   push:
-    branches: ['release']
+    branches:
+      - 'main'
+      - 'releases/**'
 
 env:
   REGISTRY: ghcr.io
