@@ -1,8 +1,8 @@
+FROM php:7.4.33-apache
+
 LABEL org.opencontainers.image.source=https://github.com/misfitpixel/php-docker
 LABEL org.opencontainers.image.description="PHP Base Container"
 LABEL org.opencontainers.image.licenses=MIT
-
-FROM php:7.4.33-apache
 
 # install core extensions.
 RUN apt-get update && apt-get install -y \
