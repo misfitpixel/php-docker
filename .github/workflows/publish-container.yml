@@ -44,7 +44,8 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Debug
-        run: echo ${{ steps.meta.outputs.tags }}
+        shell: bash
+        run: echo ${{ GITHUB_REF_NAME }}
 
 #      - name: Build and push Docker image
 #        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
