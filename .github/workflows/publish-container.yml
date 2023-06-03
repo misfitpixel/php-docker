@@ -47,16 +47,17 @@ jobs:
         id: debug
         shell: bash
         #run:  echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)" >> $GITHUB_OUTPUT
-        run: |
-          image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          version=${{ github.ref_name }} | cut -d'/' -f 2
-          echo $image
-          echo $version
+        run: echo 'tag=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)"' >> $GITHUB_OUTPUT
+        #run: |
+#          image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+#          version=${{ github.ref_name }} | cut -d'/' -f 2
+#          echo $image
+#          echo $version
 #echo "::set-output name=image::$image"
 #echo "::set-output name=version::$version"
 
-#      - name: Test Output
-#        run: echo ${{steps.debug.outputs}}
+      - name: Test Output
+        run: echo ${{steps.debug.outputs.tag}}
 
 #      - name: Build and push Docker image
 #        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
