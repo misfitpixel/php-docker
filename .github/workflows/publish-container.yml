@@ -54,7 +54,8 @@ jobs:
           echo $image
           echo $version
           echo $image:$version
-          echo "::set-output name=tag::$image:$version"
+          echo "{tag}={$image:$version}" >> $GITHUB_OUTPUT
+#          echo "::set-output name=tag::$image:$version"
 
       - name: Test Output
         run: echo ${{steps.debug.outputs.tag}}
