@@ -47,7 +47,7 @@ jobs:
         id: debug
         shell: bash
         #run:  echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)" >> $GITHUB_OUTPUT
-        run: echo 'tag=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)"' >> $GITHUB_OUTPUT
+        run: echo 'tag=$(${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)")' >> $GITHUB_OUTPUT
         #run: |
 #          image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 #          version=${{ github.ref_name }} | cut -d'/' -f 2
