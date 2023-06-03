@@ -56,7 +56,7 @@ jobs:
           echo $version
           echo $image:$version
           echo $tag
-          echo "tag=test" >> $GITHUB_OUTPUT
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 #          echo "::set-output name=tag::$image:$version"
 
       - name: Test Output
