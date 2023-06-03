@@ -54,11 +54,10 @@ jobs:
           echo $image
           echo $version
           echo $image:$version
-#echo "::set-output name=image::$image"
-#echo "::set-output name=version::$version"
+          echo "::set-output name=tag::$image:$version"
 
-#      - name: Test Output
-#        run: echo ${{steps.debug.outputs.tag}}
+      - name: Test Output
+        run: echo ${{steps.debug.outputs.tag}}
 
 #      - name: Build and push Docker image
 #        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
