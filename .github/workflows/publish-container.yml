@@ -43,29 +43,19 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Debug
-        id: debug
+      - name: Get Tag from Branch
+        id: tag
         shell: bash
-        #run:  echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)" >> $GITHUB_OUTPUT
-        #run: echo 'tag=$(${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)")' >> $GITHUB_OUTPUT
         run: |
           image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           version=$(echo ${{ github.ref_name }} | cut -d'/' -f 2)
           tag=$image:$version
-          echo $image
-          echo $version
-          echo $image:$version
-          echo $tag
           echo "tag=$tag" >> $GITHUB_OUTPUT
-#          echo "::set-output name=tag::$image:$version"
-
-      - name: Test Output
-        run: echo ${{steps.debug.outputs.tag}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
           push: true
-          tags: ${{ steps.debug.outputs.tag }}
+          tags: ${{ steps.tag.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
