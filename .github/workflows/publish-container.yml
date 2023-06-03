@@ -49,6 +49,7 @@ jobs:
         run: |
           image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           version=$(echo ${{ github.ref_name }} | cut -d'/' -f 2)
+          version=${version/main/latest}
           tag=$image:$version
           echo "tag=$tag" >> $GITHUB_OUTPUT
 
