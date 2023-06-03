@@ -44,14 +44,19 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Debug
+        id: debug
         shell: bash
-        #run: echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} #ghcr.io/misfitpixel/php-docker
-        #run:  echo "${${{ github.ref_name }}/releases\//""}"
-        #run:  echo "releases/7.4.33" | cut -d'/' -f 2
-        #run:  echo "${{ github.ref_name }}" | cut -d'/' -f 2
-        #echo 'ghcr.io/misfitpixel/php-docker:'"$(echo "releases/7.4.33" | cut -d'/' -f 2)"
-        run:  echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)"
+        #run:  echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:"$(echo "${{ github.ref_name }}" | cut -d'/' -f 2)" >> $GITHUB_OUTPUT
+        run: |
+          image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          version=${{ github.ref_name }} | cut -d'/' -f 2)
+          echo $image
+          echo $version
+#echo "::set-output name=image::$image"
+#echo "::set-output name=version::$version"
 
+#      - name: Test Output
+#        run: echo ${{steps.debug.outputs}}
 
 #      - name: Build and push Docker image
 #        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
